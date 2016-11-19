@@ -4,7 +4,7 @@
  */
 package mychatappp;
 
-import mychatappp.gui.MainScreen;
+import mychatappp.gui.LoginScreen;
 
 /**
  *
@@ -17,7 +17,7 @@ public class MyChatAppp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainScreen screen = new MainScreen();
-        screen.setVisible(true);
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.setVisible(true);
     }
 }

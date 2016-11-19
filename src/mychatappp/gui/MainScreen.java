@@ -30,7 +30,6 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ipTextField = new javax.swing.JTextField();
         targetPort = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         chat = new javax.swing.JTextArea();
@@ -38,12 +37,15 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
         sendButton = new javax.swing.JButton();
         listenButton = new javax.swing.JButton();
         receivePort = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        targetPort.setText("1234");
+        targetPort.setText("8878");
 
         chat.setColumns(20);
+        chat.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         chat.setRows(5);
         jScrollPane1.setViewportView(chat);
 
@@ -63,6 +65,10 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
 
         receivePort.setText("8877");
 
+        jLabel1.setText("Transmitting Port:");
+
+        jLabel2.setText("Receiving Port:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,15 +76,18 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(listenButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(receivePort, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(targetPort, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(targetPort, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(185, 185, 185))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(message)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -89,18 +98,20 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ipTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(targetPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listenButton)
-                    .addComponent(receivePort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(listenButton)
+                        .addComponent(receivePort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(targetPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(message, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -115,9 +126,11 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
         // TODO add your handling code here:
+        String ipField = "localhost";
         MessageTransmitter transmitter = new MessageTransmitter(message.getText(),
-                ipTextField.getText(), Integer.parseInt(targetPort.getText()));
+                ipField, Integer.parseInt(targetPort.getText()));
         transmitter.start();
+        chat.append("You: " + message.getText() + System.lineSeparator());
     }//GEN-LAST:event_sendButtonActionPerformed
 
     /**
@@ -156,7 +169,8 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea chat;
-    private javax.swing.JTextField ipTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton listenButton;
     private javax.swing.JTextField message;
@@ -167,6 +181,7 @@ public class MainScreen extends javax.swing.JFrame implements WritableGUI {
 
     @Override
     public void write(String s) {
+        chat.append("User: ");
         chat.append(s + System.lineSeparator());
     }
 }
